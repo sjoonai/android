@@ -11,7 +11,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         currentAppVersionCode = BuildConfig.VERSION_CODE; // BuildConfig.VERSION_CODE 는 현재 앱의 버전 코드를 가져옵니다.
-        // ...
+        
     }
 
     // onResume 메서드에서 앱 버전을 확인하고 업데이트 확인 다이얼로그를 표시합니다.
