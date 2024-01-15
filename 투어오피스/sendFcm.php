@@ -4,8 +4,8 @@
  */
 include '../include/top_proc.html';
 
-$users = array('f6PRhf6mRJ6Tlh61qfTKGP:APA91bH1KvH35mihjH_o5pH6_e0lAZiNRXHDGelBhyT6YX3i5gP9td1iBYcRbFVyU3S40YBOvkCJmdHsGHu2vUerpmKyPPixqCIiRfpb34TzPVe70ThZl_WBpnq8U1lClxirAFdYDCxT');
-$fcmKey = 'AAAAb9bj-Wo:APA91bHoVHz7T2B2ptiie41AJglDDm8Yr0DtZu3G-iOTERHAoE9-pNIFMEzsuDqHzizR-WqzsGCfTe0RzsJSjCBnL5U7zDkM22nELsmPfgv_r5YAi1XGqTS50-oJ0n2mvtJHOZeb-7ND'; //Cloud Messaging API 서버 키
+$users = array('FCM token 배열');
+$fcmKey = ''; //Cloud Messaging API 서버 키
 $url = 'https://fcm.googleapis.com/fcm/send';
 
 $fields = array(
