@@ -9,12 +9,14 @@ import android.content.DialogInterface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -25,15 +27,32 @@ import com.google.firebase.messaging.FirebaseMessaging;
 
 public class MainActivity extends AppCompatActivity {
 
-    private BackPressCloseHandler backPressCloseHandler;
+    private boolean doubleBackToExitPressedOnce = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //뒤로 버튼 두번 클릭 종료
-        backPressCloseHandler = new BackPressCloseHandler(this);
+        /*
+        안드로이드 33 버전부터 onBackPressed() 함수 사용 불가
+        뒤로 가기 버튼을 처리하는 콜백 등록
+         */
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if (doubleBackToExitPressedOnce) {
+                    finish();
+                } else {
+                    doubleBackToExitPressedOnce = true;
+                    Toast.makeText(getApplicationContext(), "한 번 더 누르면 종료됩니다.", Toast.LENGTH_LONG).show();
+                }
+
+                // 2초 동안 두 번째 누름 감지를 위해 대기
+                new Handler().postDelayed(() -> doubleBackToExitPressedOnce = false, 2000);
+            }
+        };
+        getOnBackPressedDispatcher().addCallback(this, callback);
 
         //네트워크 상태 확인
         ConnectivityManager manager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -107,11 +126,7 @@ public class MainActivity extends AppCompatActivity {
         logRegToken();
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        backPressCloseHandler.onBackPressed();
-    }
+
 
     private void logRegToken() {
         // [START log_reg_token]
