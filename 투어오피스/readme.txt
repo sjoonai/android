@@ -13,3 +13,9 @@ echo '<script>if (typeof android !== "undefined") android.setUserCheck("'.$mb_id
 android 접근명은 앱의 MainActivity.java에 명시되어야 함.
 
  
+ 
+#
+안드로이드 33 버전 이후부터 기존의 뒤로가기 버튼 2번 클릭시 자동종료되는 코드 사용불가해서 대체 코드 추가
+기존의 소스는 제거
+
+ 
